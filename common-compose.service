@@ -1,0 +1,17 @@
+[Unit]
+Description=Common Docker Compose Application Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/ubuntu/common-compose
+Environment="DOCKER_HOST=unix:///run/user/1001/docker.sock"
+ExecStartPre=/home/ubuntu/.local/bin/docker-compose down -v
+ExecStart=/home/ubuntu/.local/bin/docker-compose up -d
+ExecStop=/home/ubuntu/.local/bin/docker-compose down -v
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
