@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.5
+    image: mariadb:10.9.4
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
     volumes:
@@ -30,7 +30,7 @@ services:
       - proxy-tier
 
   letsencrypt-companion:
-    image: nginxproxy/acme-companion
+    image: nginxproxy/acme-companion:2.2.3
     restart: always
     volumes:
       - certs:/etc/nginx/certs
